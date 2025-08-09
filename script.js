@@ -25,13 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
     // --- Intro Page Logic (only on index.html) ---
     const heroTextElement = document.getElementById('hero-text');
     const knowMoreBtn = document.getElementById('knowMoreBtn');
-    const carAnimation = document.getElementById('car-animation');
+    const carAnimationContainer = document.getElementById('car-animation-container');
 
-    if (heroTextElement && knowMoreBtn) {
+    if (heroTextElement && knowMoreBtn && carAnimationContainer) {
         // Typing animation on the hero text
         const heroText = "Hey, I'm Alex Johnson. A Full-Stack Developer.";
         let i = 0;
@@ -46,13 +45,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // "Know me more" button and car animation
         knowMoreBtn.addEventListener('click', () => {
-            // Show the car animation element
-            carAnimation.classList.remove('hidden');
+            // Make the car visible and start the animation
+            carAnimationContainer.classList.remove('invisible');
+            carAnimationContainer.classList.add('drive-animation');
             
             // Wait for the animation to finish (2 seconds)
             setTimeout(() => {
                 window.location.href = 'ai-assistant.html';
-            }, 2000); // This should match the animation duration
+            }, 2000); // This should match the animation duration in CSS
         });
     }
 
