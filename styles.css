@@ -15,14 +15,20 @@
     border: 2px solid #1f2937;
 }
 
-/* New animation class for the car */
-.drive-animation {
-    animation: drive-by 2s ease-in-out forwards;
+/* New animation for the boy */
+.fly-animation {
+    animation: fly-in-out 3s ease-in-out forwards;
 }
 
-@keyframes drive-by {
+@keyframes fly-in-out {
     0% {
-        transform: translateX(0);
+        transform: translateX(0%);
+    }
+    15% {
+        transform: translateX(20%);
+    }
+    85% {
+        transform: translateX(20%);
     }
     100% {
         transform: translateX(100vw);
