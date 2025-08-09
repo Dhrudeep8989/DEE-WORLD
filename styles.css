@@ -15,15 +15,14 @@
     border: 2px solid #1f2937;
 }
 
-/* Car animation */
-.car-emoji {
-    transform: translateX(-100%);
+/* New animation class for the car */
+.drive-animation {
     animation: drive-by 2s ease-in-out forwards;
 }
 
 @keyframes drive-by {
     0% {
-        transform: translateX(-100%);
+        transform: translateX(0);
     }
     100% {
         transform: translateX(100vw);
