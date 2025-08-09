@@ -26,33 +26,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Intro Page Logic (only on index.html) ---
-    const heroTextElement = document.getElementById('hero-text');
     const knowMoreBtn = document.getElementById('knowMoreBtn');
-    const carAnimationContainer = document.getElementById('car-animation-container');
+    const boyAnimationContainer = document.getElementById('boy-animation-container');
 
-    if (heroTextElement && knowMoreBtn && carAnimationContainer) {
-        // Typing animation on the hero text
-        const heroText = "Hey, I'm Alex Johnson. A Full-Stack Developer.";
-        let i = 0;
-        function typeHeroText() {
-            if (i < heroText.length) {
-                heroTextElement.textContent += heroText.charAt(i);
-                i++;
-                setTimeout(typeHeroText, 50); // Typing speed
-            }
-        }
-        typeHeroText();
-
-        // "Know me more" button and car animation
+    if (knowMoreBtn && boyAnimationContainer) {
+        // "Know me more" button and boy animation
         knowMoreBtn.addEventListener('click', () => {
-            // Make the car visible and start the animation
-            carAnimationContainer.classList.remove('invisible');
-            carAnimationContainer.classList.add('drive-animation');
+            // Make the boy animation visible and add the animation class
+            boyAnimationContainer.classList.remove('invisible');
+            boyAnimationContainer.classList.add('fly-animation');
             
-            // Wait for the animation to finish (2 seconds)
+            // Wait for the animation to finish (3 seconds) before redirecting
             setTimeout(() => {
                 window.location.href = 'ai-assistant.html';
-            }, 2000); // This should match the animation duration in CSS
+            }, 3000); 
         });
     }
 
