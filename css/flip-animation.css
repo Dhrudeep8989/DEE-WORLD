@@ -1,0 +1,422 @@
+/* Flip Animation Styles */
+.flip-container {
+    perspective: 1200px;
+    width: 100vw;
+    height: 100vh;
+    perspective: 1200px;
+    overflow: hidden;
+}
+
+.flipper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(.4,2,.6,1);
+    transform-style: preserve-3d;
+}
+
+.flip-container.show-back .flipper {
+    transform: rotateY(180deg);
+}
+.flip-container.show-front .flipper {
+    transform: rotateY(0deg);
+}
+
+/* Flip sides fill container, stack on top of each other */
+.flip-side {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0; left: 0;
+    backface-visibility: hidden;
+    overflow: hidden; /* Prevent scrollbars */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Front side */
+.flip-side.front {
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.2); 
+    backdrop-filter: blur(0px);
+    transform: rotateY(0deg);
+}
+
+/* Back side */
+.flip-side.back {
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(0px);
+    transform: rotateY(180deg);
+}
+
+/* Flip animation states */
+.flip-container.show-front .front {
+    transform: rotateY(0deg);
+    z-index: 2;
+    pointer-events: auto;
+}
+.flip-container.show-front .back {
+    transform: rotateY(180deg);
+    z-index: 1;
+    pointer-events: none;
+}
+.flip-container.show-back .front {
+    transform: rotateY(0deg);
+    z-index: 1;
+    pointer-events: none;
+}
+.flip-container.show-back .back {
+    transform: rotateY(deg);
+    z-index: 2;
+    pointer-events: auto;
+}
+
+/* Remove scroll from html/body */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* AI Assistant specific styles for flip */
+.flip-side.back .ai-header {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.5
+    rem 0;
+}
+
+.flip-side.back .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flip-side.back .ai-status {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: white;
+}
+
+.flip-side.back .ai-avatar {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, #ff6b6b, #ffd700);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.flip-side.back .status-indicator {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.flip-side.back .status-indicator.online {
+    background: #2ecc71;
+    animation: pulse-online 2s infinite;
+}
+
+@keyframes pulse-online {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.flip-side.back .ai-info h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.flip-side.back .status-text {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Chat Container in flip mode */
+.flip-side.back .chat-container {
+    flex: 1;
+    padding: 2rem 0;
+    overflow-y: auto;
+    height: calc(100vh - 200px);
+}
+
+.flip-side.back .chat-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.flip-side.back .chat-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-bottom: 120px;
+    /* max-height: calc(100% - 100px); */
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+.flip-side.back .chat-input-section {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.5rem 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+/* Message styles for flip version */
+.flip-side.back .message {
+    display: flex;
+    gap: 1rem;
+    animation: messageSlideIn 0.4s ease-out;
+}
+
+.flip-side.back .message-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.flip-side.back .ai-message .message-avatar {
+    background: linear-gradient(45deg, #ff6b6b, #ffd700);
+    color: white;
+}
+
+.flip-side.back .user-message .message-avatar {
+    background: linear-gradient(45deg, #74b9ff, #0984e3);
+    color: white;
+    font-weight: bold;
+}
+
+.flip-side.back .message-content {
+    max-width: 70%;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1rem 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.flip-side.back .user-message {
+    flex-direction: row-reverse;
+    text-align: right;
+}
+
+.flip-side.back .user-message .message-content {
+    background: linear-gradient(45deg, #74b9ff, #0984e3);
+    color: white;
+}
+
+/* Quick actions in flip mode */
+.flip-side.back .quick-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.flip-side.back .quick-btn {
+    background: rgba(116, 185, 255, 0.1);
+    color: #74b9ff;
+    border: 1px solid #74b9ff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.flip-side.back .quick-btn:hover {
+    background: #74b9ff;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Input styles for flip version */
+.flip-side.back .input-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.flip-side.back .input-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    background: white;
+    border-radius: 25px;
+    padding: 0.25rem 0.5rem;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+}
+
+.flip-side.back #user-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    resize: none;
+    font-family: inherit;
+    font-size: 1rem;
+    max-height: 120px;
+    background: transparent;
+}
+
+.flip-side.back .send-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #74b9ff, #0984e3);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.flip-side.back .send-btn:hover:not(:disabled) {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(116, 185, 255, 0.4);
+}
+
+.flip-side.back .send-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.flip-side.back .input-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Typing indicator for flip */
+.flip-side.back .typing-indicator {
+    display: flex;
+    gap: 1rem;
+    opacity: 0.7;
+}
+
+.flip-side.back .typing-content {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1rem 1.5rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.flip-side.back .typing-animation {
+    display: flex;
+    gap: 4px;
+}
+
+.flip-side.back .typing-animation span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #74b9ff;
+    animation: typing 1.4s infinite ease-in-out;
+}
+
+.flip-side.back .typing-animation span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.flip-side.back .typing-animation span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.3;
+    }
+    30% {
+        transform: translateY(-10px);
+        opacity: 1;
+    }
+}
+
+/* Responsive design for flip */
+@media (max-width: 768px) {
+    .flip-side.back .chat-container {
+        padding: 1rem 0;
+        height: calc(100vh - 180px);
+    }
+    
+    .flip-side.back .message-content {
+        max-width: 85%;
+        padding: 0.8rem 1rem;
+    }
+    
+    .flip-side.back .input-footer {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .flip-side.back .ai-status {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+    
+    .flip-side.back .message-content {
+        max-width: 90%;
+    }
+}
+
+/* Navigation button styles */
+.nav-btn {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    border-radius: 24px;
+    padding: 0.5rem 1.5rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin: 0 1rem;
+    transition: background 0.2s, border 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-btn:hover {
+    background: rgba(255,255,255,0.18);
+    border: 1px solid #74b9ff;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
