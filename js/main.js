@@ -19,8 +19,18 @@ function initializeWebsite() {
     initNetBackground();
 }
 
+// Restart Vanta background if page becomes visible again
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+        if (!window.vantaEffect) {
+            initNetBackground();
+        }
+    }
+});
+
+
 function initNetBackground() {
-    VANTA.NET({
+    window.vantaEffect = VANTA.NET({
         el: "#vantajs-net",
         mouseControls: true,
         touchControls: true,
